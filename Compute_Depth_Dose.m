@@ -15,32 +15,20 @@ function dose_absoroption_function_table = Compute_Depth_Dose(d0, resolution, ma
 % [0, 20] and the second one has the domain x =20 up to the size of the
 % patient's head
 
-    % Calculate the total number of points
-    totalPoints = floor(maxDepthFromSkin / depthFromSkinResolution) + 1;
-
-    % Pre-allocate the depthDose array
-    depthDose = zeros(totalPoints, 2); % Rows for points, 2 columns for depth and dose
-
-    % Iterate over each depth point and calculate the corresponding dose
-    for index = 1:totalPoints
-        currentDepth = (index - 1) * depthFromSkinResolution;
-        
-        % Assign the depth value to the first column
-        depthDose(index, 1) = currentDepth;
-
-        % Calculate and assign the dose value to the second column
-        if currentDepth <= d0
-            % Use the first linear function for depths up to d0
-            depthDose(index, 2) = solveLinearEq([0,0],[20,1],currentDepth);
-        else
-            % Use the second linear function for depths beyond d0
-            depthDose(index, 2) = solveLinearEq([20,1],[120,0.5],currentDepth);
-        end
+    % Depth dose at each depthFromSkinResolution increment
+    % Between 0 and d0
+    for i = 0:resolution:d0
+        depthDose(1,i+1) = i;
+            depthDose(2,i+1) = solveLinearEq([0,0],[20,1],i);
     end
-
-    % The depthDose array is already in the correct format for the LUT
-    dose_absoroption_function_table = depthDose;
-
+    
+    % Between d0 and maxDepthFromSkin
+    for j = d0:resolution:maximum
+        depthDose(1,j+1) = j;
+            depthDose(2,j+1) = solveLinearEq([20,1],[120,0.5],j);
+    end
+    
+    dose_absoroption_function_table = depthDose';
 
 end
 
@@ -55,7 +43,7 @@ function y = solveLinearEq(p1, p2, x )
 
     % Extract coordinates of the points
     x1 = p1(1);
-    y1 = P1(2);
+    y1 = p1(2);
     x2 = p2(1);
     y2 = p2(2);
     
@@ -66,5 +54,5 @@ function y = solveLinearEq(p1, p2, x )
     b = y1 - m * x1;
     
     % Calculate the y value for the given x
-    y = m * x + b;
+    y = m.* x + b;
 end
