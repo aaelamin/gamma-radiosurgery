@@ -1,4 +1,4 @@
-function [intersection, rem] = IntersectTwoLines(P1, v1, P2, v2)
+function [intersection] = IntersectTwoLines(P1, v1, P2, v2)
 %
 % INPUTS:
 %        P1 - Fixed point of the first line as a 3-element vector [x, y, z].
@@ -73,17 +73,10 @@ function [intersection, rem] = IntersectTwoLines(P1, v1, P2, v2)
 
     if isnan(M)     % Lines are pararel
         disp("The lines are parrarel");
-        intersection = [];
+        intersection = NaN;
     else
         intersection = M;
     end
-
-        distance1 = norm(M - L1);
-        distance2 = norm(M - L2);
-        
-        rem = min(distance1, distance2);
-
-    
   
 end
 

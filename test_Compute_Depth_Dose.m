@@ -3,6 +3,6 @@ maxDepthFromSkin = max(Head) * 2;
 d0 = 2;
 depthFromSkinResolution = 1;
 
-global depthDoseLUT;
-depthDoseLUT = Compute_Depth_Dose(maxDepthFromSkin, d0, depthFromSkinResolution);
-disp(depthDoseLUT)
+global dose_absoroption_function_table;
+dose_absoroption_function_table = Compute_Depth_Dose( d0, depthFromSkinResolution, maxDepthFromSkin);
+disp(dose_absoroption_function_table)
