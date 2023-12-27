@@ -1,6 +1,7 @@
-
-maximum = 22.5;
-beam_radius = 7.5;
+Head = [80, 100, 80, 0, 0, 0];
+maximum = max(Head);
+beam_diameter = 30;
+peak = beam_diameter/4;
 resolution = 1;
 
 global radial_dose_function_table;

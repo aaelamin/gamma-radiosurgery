@@ -1,8 +1,9 @@
 Head = [80, 100, 80, 0, 0, 0];
-maxDepthFromSkin = max(Head) * 2;
-d0 = 2;
-depthFromSkinResolution = 1;
+maximum = max(Head)*2;
+dmax = 2;
+resolution = 1;
 
 global dose_absoroption_function_table;
-dose_absoroption_function_table = Compute_Depth_Dose( d0, depthFromSkinResolution, maxDepthFromSkin);
+
+dose_absoroption_function_table = Compute_Depth_Dose( dmax, resolution, maximum);
 disp(dose_absoroption_function_table)

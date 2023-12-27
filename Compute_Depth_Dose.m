@@ -9,11 +9,12 @@ function dose_absoroption_function_table = Compute_Depth_Dose(dmax, resolution, 
 % Output: dose_absoroption_function_table - the generated lookup table with depth and dose values
 
 % Essentially we are to compute a piecewise function that is made up of two
-% linear functions given by the provided graph.
+% segments of linear functions given by the graph.
 
 % The first part of the piecewise function is between has the domain
 % [0, 20] and the second one has the domain x =20 up to the size of the
 % patient's head
+
  % Create a vector of depths from 0 to maximum with the given resolution
     depths = 0:resolution:maximum;
 
@@ -26,7 +27,7 @@ function dose_absoroption_function_table = Compute_Depth_Dose(dmax, resolution, 
 
         % Apply the first linear equation for depths up to d0
         if depth <= dmax
-            doses(i) = solveLinearEq([0,0], [20,1], depth);
+            doses(i) = solveLinearEq([0,0.5], [20,1], depth);
         % Apply the second linear equation for depths greater than d0
         else
             doses(i) = solveLinearEq([20,1], [120,0.5], depth);

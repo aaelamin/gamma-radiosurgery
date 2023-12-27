@@ -7,6 +7,10 @@ function radial_dose_function_table = Compute_Radial_Dose(maximum, resolution, p
 %         peak - the highest point in the graph
 %         Resolution - the incremental resolution for the table (in mm)
 % Output: radial_dose_function_table - the generated lookup table with depth and dose values
+
+    % Using the same logic as Compute_Depth_Dose we break the piecewise
+    % function into 3 segments and compute find the linear equation for
+    % each segment
     
     
     % Initialize the radial dose array
@@ -24,10 +28,10 @@ function radial_dose_function_table = Compute_Radial_Dose(maximum, resolution, p
         if i >= -peak && i <= peak
             % Maximum dose within the beam radius
             radialDose(2, index) = 1;
-        elseif i < -peak
+        elseif i >= -22.5 && i < -peak
             % Linearly decreasing dose outside the beam radius (negative side)
             radialDose(2, index) = solveLinearEq([-22.5, 0], [-peak, 1], i);
-        elseif i > peak
+        elseif i > peak && i <= 22.5
             % Linearly decreasing dose outside the beam radius (positive side)
             radialDose(2, index) = solveLinearEq([peak, 1], [22.5, 0], i);
         else

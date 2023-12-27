@@ -1,0 +1,20 @@
+global beams;
+head = [80, 100, 80, 0, 0, 0];
+PTV = [15, 30, 0, 15];
+isocenter = [PTV(2), PTV(3), PTV(4)];
+Compute_Skin_Entry_Points(isocenter, head);
+
+figure;
+hold on;
+axis equal;
+grid on;
+xlabel('X-axis');
+ylabel('Y-axis');
+zlabel('Z-axis');
+title('Head Visualization');
+
+% Plot the head
+[X, Y, Z] = ellipsoid(head(4), head(5), head(6), head_radii(1), head_radii(2), head_radii(3));
+surf(X, Y, Z, 'FaceColor', 'cyan', 'EdgeColor', 'black');
+
+hold off;
