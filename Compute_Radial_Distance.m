@@ -11,7 +11,7 @@ function radial_distance = Compute_Radial_Distance(point_of_interest, beam_index
     beam_direction = beams(beam_index).direction;
 
     % Assuming the beam originates from a standard point (like the center of the helmet)
-    beam_origin = [0, 0, 0];
+    beam_origin = [30, 0, 15];
 
     % Vector from beam origin to the point of interest
     vector_to_point = point_of_interest - beam_origin;

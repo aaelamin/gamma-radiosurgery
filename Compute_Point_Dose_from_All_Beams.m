@@ -1,4 +1,9 @@
 function point_dose_value = Compute_Point_Dose_from_All_Beams(point_of_interest)
+    % in order to find the dose value at a specific point, we need to find
+    % the sum of dose values at a point from all beams while excluding
+    % unsafe beams that hit the OAR since they do not contribute to the  
+    % total dose value
+    
     global beams;
 
     % Initialize the total dose to zero

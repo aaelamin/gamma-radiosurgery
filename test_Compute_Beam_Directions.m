@@ -1,8 +1,8 @@
-helmet_diameter = 30;  % Example radius, adjust as necessary
-beam_separation_angle = 30;  % Example separation angle in degrees
+helmet_diameter = 30;  
+beam_separation_angle = 30; 
 Head = [80, 100, 80, 0, 0, 0];
 
-
+clear global beams;
 global beams
 beams = Compute_Beam_Directions(helmet_diameter, beam_separation_angle);
 
@@ -17,7 +17,7 @@ grid on;
 
 
 
-% The code belwo was implemented using the help of chatgpt
+% The code below was implemented using the help of chatgpt
 
 for i = 1:length(beams)
     beam = beams(i);
